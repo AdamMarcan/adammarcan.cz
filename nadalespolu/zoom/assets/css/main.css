@@ -1,0 +1,163 @@
+/*
+ * Globals
+ */
+.nostyled {
+  list-style: none;
+  padding: 0;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.clear_zero {
+  clear: both;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  line-height: 0;
+  font-size: 0;
+}
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.decoration {
+  position: absolute;
+  display: block;
+  overflow: hidden;
+}
+/* =============================================================================
+
+	6) LESS
+
+   ========================================================================== */
+/***** BASICS *****/
+@font-face {
+  font-family: GT America;
+  src: url(../font/GT-America-Standard-Regular.woff2);
+}
+@font-face {
+  font-family: GT America Bold;
+  src: url(../font/GT-America-Standard-Bold.woff2);
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+div.clear {
+  clear: both;
+}
+a {
+  color: #348FFB;
+}
+a {
+  text-decoration: underline;
+}
+a:hover {
+  text-decoration: none;
+}
+a::-moz-selection {
+  color: white;
+  background: #282828;
+  text-shadow: none;
+}
+a::selection {
+  color: white;
+  background: #282828;
+  text-shadow: none;
+}
+.hide {
+  display: none;
+}
+a.not-textlink {
+  box-shadow: none;
+}
+/************************ 
+LAYOUT 
+************************/
+body {
+  font-family: 'GT America', sans-serif;
+  background: #fff;
+  position: relative;
+  text-align: left;
+  padding-top: 60px;
+  color: #333;
+}
+html {
+  color: #F8F6F5;
+  text-align: center;
+  scroll-behavior: smooth;
+}
+div.wrapper {
+  width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+h1 {
+  font-size: 40px;
+  margin-bottom: 60px;
+  color: #348FFB;
+}
+div.video {
+  margin-bottom: 50px;
+  background: #F4F4F8;
+  padding: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  width: 700px;
+}
+div.video h2 {
+  font-size: 25px;
+  margin-bottom: 20px;
+  color: #F06D2F;
+}
+div.video iframe {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  width: 100%;
+}
+div.widget {
+  width: 300px;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+}
+div.contact {
+  width: 300px;
+  margin: 0 auto 200px auto;
+  text-align: center;
+  line-height: 1.5;
+}
+div.contact a {
+  display: block;
+  font-size: 22px;
+  font-weight: bold;
+}
+/************************ 
+MOBILE CSS 
+************************/
+@media (max-width: 990px) {
+  div.wrapper {
+    width: 88%;
+    padding: 0 6%;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  div.wrapper div.widget {
+    display: none;
+  }
+  iframe {
+    width: 100%;
+  }
+}
