@@ -1,0 +1,158 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rabí | MAM ateliér</title>
+<meta name="description" content="Seriál MAM ateliér o rekonstrukci bývalé synagogy v&nbsp;Rabí u&nbsp;Sušice. #mam_rabi">
+<style>
+:root{--sky:#70c2de;--orange:#ea6121;--ink:#222;--text:#444;--muted:#757575;--line:#e3e3e2;--bg:#fff;--fg:var(--text);--soft:#f5f5f5;--frame:#e3e3e2;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#222;--fg:#e3e3e2;--ink:#f5f5f5;--text:#e3e3e2;--muted:#a8a8a8;--line:#3a3a3a;--soft:#2b2b2b;--frame:#3a3a3a}}
+:root[data-theme="dark"]{--bg:#222;--fg:#e3e3e2;--ink:#f5f5f5;--text:#e3e3e2;--muted:#a8a8a8;--line:#3a3a3a;--soft:#2b2b2b;--frame:#3a3a3a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--muted);font-family:"GT America","GTA-Standard","Helvetica Neue",Arial,sans-serif;font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{width:90%;max-width:1200px;margin:0 auto}
+header.hero{padding:25px 0 20px}
+.bar{display:flex;justify-content:space-between;align-items:center;color:var(--ink);height:40px}
+.brand{display:flex;align-items:center;text-decoration:none;color:var(--ink)}
+.brand img{display:block;height:26px;width:auto}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .brand img{filter:invert(1) brightness(1.1)}}
+:root[data-theme="dark"] .brand img{filter:invert(1) brightness(1.1)}
+.tag{display:none}
+.menu a{position:relative;display:inline-block;padding:20px 0;line-height:0;font-size:15px;color:var(--ink);text-decoration:none}
+.menu a::after{content:"";position:absolute;left:0;right:0;top:-6px;height:2px;background:var(--sky);transform:scaleX(0);transition:transform .2s cubic-bezier(.4,0,.21,1.1)}
+.menu a:hover::after,.menu a:focus-visible::after,.menu a.on::after{transform:scaleX(1)}
+.menu ul{list-style:none;margin:0;padding:0}
+.burger{display:none;position:relative;z-index:102;width:28px;height:28px;padding:0;border:0;background:none;color:var(--ink);cursor:pointer}
+.burger span,.burger span::before,.burger span::after{position:absolute;left:8px;width:12px;height:2px;background:currentColor;transition:background-color .15s linear,transform .25s}
+.burger span{top:13px}.burger span::before,.burger span::after{content:"";left:0}
+.burger span::before{top:-8px}.burger span::after{top:8px}
+.menu-open .burger span{background:transparent}
+.menu-open .burger span::before{transform:translateY(8px) rotate(45deg) scaleX(1.2)}
+.menu-open .burger span::after{transform:translateY(-8px) rotate(-45deg) scaleX(1.2)}
+@media (min-width:1200px){.menu ul{display:flex;gap:50px}}
+@media (max-width:1199px){
+.burger{display:block}
+.menu{position:fixed;left:-44%;top:0;bottom:0;width:44%;background:var(--bg);overflow-y:auto;z-index:101;transition:transform .4s cubic-bezier(.64,.01,.28,1);padding:25px 20px 25px 0}
+.menu-open .menu{transform:translateX(100%)}
+.menu-open{overflow:hidden}
+.menu ul{text-align:right;margin-top:20px}
+.menu a{padding:5px;line-height:1.3;font-size:20px}
+.menu a::after{display:none}
+.menu a:hover,.menu a.on{color:var(--sky)}}
+@media (max-width:767px){.menu{left:-60%;width:60%}}
+@media (prefers-reduced-motion:reduce){.menu,.menu a::after{transition:none}}
+.picto{display:none}
+.back{display:inline-block;margin-top:28px;padding:6px 18px;border:1px solid var(--line);color:var(--text);background:var(--bg);font-size:15px;line-height:26px;text-decoration:none}
+.back:hover,.back:focus-visible{color:var(--sky);border-color:var(--sky)}
+.intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,6vw,80px);align-items:start;padding:clamp(40px,7vw,80px) 0 clamp(40px,6vw,72px)}
+h1{font-weight:400;font-size:clamp(36px,4.6vw,48px);line-height:1;letter-spacing:-1px;margin:0;color:var(--ink);max-width:14ch}
+.lead{color:var(--text);font-size:19px;line-height:1.4;max-width:46ch;margin:6px 0 0}
+main{padding:0 0 clamp(56px,8vw,96px)}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:32px}
+.head h2{font-weight:400;font-size:16px;letter-spacing:-.5px;color:var(--text);margin:0}
+.head p{margin:0;color:var(--muted);font-size:12px}
+ol.eps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 28px}
+.frame{margin:0;background:var(--frame);padding:12px 12px 0;transition:background-color .2s ease}
+.ep.is-playing .frame{background:var(--sky)}
+figcaption{display:flex;justify-content:space-between;padding:26px 2px 12px;font-size:12px;line-height:1.4;color:var(--muted)}
+.ep.is-playing figcaption{color:#222}
+.ep h3{font-weight:400;font-size:16px;letter-spacing:-.5px;line-height:1.25;color:var(--text);margin:12px 0 6px}
+.ep p{margin:0;color:var(--muted);font-size:14px;line-height:1.6;max-width:40ch}
+a:focus-visible{outline:2px solid var(--orange);outline-offset:4px}
+.cta-sec{background:var(--sky);color:#222;text-align:center;padding:clamp(56px,8vw,96px) 0}
+.cta-sec h2{font-weight:400;font-size:clamp(28px,4vw,40px);line-height:1.1;letter-spacing:-1px;margin:0 auto 14px;max-width:32ch;color:#222}
+.cta-sec p{margin:0 auto 28px;max-width:44ch;font-size:19px;line-height:1.4;color:#222}
+.cta-row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.cta{display:inline-flex;align-items:center;gap:10px;color:#fff;text-decoration:none;padding:10px 24px;font-size:15px;line-height:26px;border:1px solid transparent;transition:background-color .15s ease}
+.cta svg{width:20px;height:20px;flex:none}
+.cta-ig{background:var(--orange)}
+.cta-ig:hover,.cta-ig:focus-visible{background:#c9500f}
+.cta-fb{background:#2f5566}
+.cta-fb:hover,.cta-fb:focus-visible{background:#22414f}
+.cta-sec a:focus-visible{outline:2px solid #222;outline-offset:3px}
+footer{background:var(--soft);color:var(--muted);padding:33px 0;font-size:14px;line-height:25px}
+.social{display:flex;justify-content:flex-end;align-items:center;gap:11px}
+.dash{display:inline-block;width:13px;height:1px;border-top:2px solid var(--muted);vertical-align:middle;margin-right:11px}
+.social ul{display:flex;gap:11px;list-style:none;margin:0;padding:0}
+.social a{color:var(--text);text-decoration:none}
+.social a:hover,.social a:focus-visible{color:var(--sky)}
+@media (max-width:640px){.social{justify-content:flex-start;flex-wrap:wrap}}
+@media (max-width:900px){ol.eps{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 18px}}
+@media (max-width:640px){.intro{grid-template-columns:1fr;gap:20px}}
+@media (max-width:420px){ol.eps{grid-template-columns:1fr}.ep{max-width:340px}}
+.media{position:relative;aspect-ratio:9/16;background:#000}
+.play{all:unset;display:block;width:100%;height:100%;cursor:pointer;position:relative}
+.play img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.pbtn{position:absolute;right:-16px;bottom:-16px;z-index:2;width:84px;height:84px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;transition:transform .15s ease}
+.pbtn svg{width:42px;height:42px;margin-left:2px}
+.play:hover .pbtn,.play:focus-visible .pbtn{transform:scale(1.1)}
+@media (prefers-reduced-motion:reduce){.pbtn,.frame{transition:none}}
+.play:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;display:block}
+.watch{font-size:12px;line-height:1.4;color:var(--muted);text-decoration:none;border-bottom:1px solid currentColor}
+.watch:hover,.watch:focus-visible{color:var(--ink)}
+.ep.is-playing .watch{color:#222}
+</style></head><body>
+<header class="hero"><div class="wrap">
+<div class="bar"><a class="brand" href="https://mamatelier.cz/" aria-label="MAM ateliér"><img src="https://mamatelier.cz/wp-content/uploads/2025/11/MAM_logotyp-seda.png" alt="MAM ateliér" width="180" height="26"></a><nav class="menu" id="menu" aria-label="Hlavní menu"><ul><li><a class="on" href="https://mamatelier.cz/">Projekty</a></li><li><a href="https://mamatelier.cz/o-nas/">O nás</a></li><li><a href="https://mamatelier.cz/jak-pracujeme/">Jak pracujeme</a></li><li><a href="https://mamatelier.cz/konzultace/">Konzultujeme</a></li><li><a href="https://mamatelier.cz/mimo-atelier/">Mimo ateliér</a></li><li><a href="https://mamatelier.cz/contact/">Kontakt</a></li></ul></nav><button type="button" class="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span></button></div>
+<svg class="picto" viewBox="0 0 56 56" aria-label="Rekonstrukce"><path d="M14 46L28 6l14 40" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M8 52h40" stroke="currentColor" stroke-width="4"/></svg>
+<div class="intro"><div><h1>Synagoga v&nbsp;Rabí</h1>
+<a class="back" href="https://mamatelier.cz/portfolio/byvala-synagoga-rabi/">← Zpět na projekt</a></div>
+<p class="lead">Vrátili jsme život bývalé synagoze v&nbsp;Rabí u&nbsp;Sušice, kulturní památce z 15. století. Celou rekonstrukci jsme natočili v pěti dílech a jednom bonusu.</p></div>
+</div></header>
+<main><div class="wrap">
+<div class="head"><h2>Seriál z rekonstrukce</h2><p>Léto 2026</p></div>
+<ol class="eps">
+<li class="ep" data-id="DZpktG-qhJ1">
+<figure class="frame"><div class="media"><button type="button" class="play" aria-label="Přehrát Díl 1: Vrátili jsme život staré synagoze"><img src="nahledy/DZpktG-qhJ1.jpg" alt="Díl 1: Vrátili jsme život staré synagoze" width="360" height="640" loading="lazy"><span class="pbtn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3.5v17l14-8.5z" fill="currentColor"/></svg></span></button></div><figcaption><span class="ep-n">Díl 1</span><a class="watch" href="https://www.instagram.com/p/DZpktG-qhJ1/" target="_blank" rel="noopener">Otevřít na Instagramu</a></figcaption></figure>
+<h3>Vrátili jsme život staré synagoze</h3><p>Úvod do pětidílného seriálu. Kulturní památka z 15. století, z jejíž rekonstrukce měli všichni strach.</p></li>
+<li class="ep" data-id="DZ71hLKK1cH">
+<figure class="frame"><div class="media"><button type="button" class="play" aria-label="Přehrát Díl 2: Fasáda a jak památku financovat"><img src="nahledy/DZ71hLKK1cH.jpg" alt="Díl 2: Fasáda a jak památku financovat" width="360" height="640" loading="lazy"><span class="pbtn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3.5v17l14-8.5z" fill="currentColor"/></svg></span></button></div><figcaption><span class="ep-n">Díl 2</span><a class="watch" href="https://www.instagram.com/p/DZ71hLKK1cH/" target="_blank" rel="noopener">Otevřít na Instagramu</a></figcaption></figure>
+<h3>Fasáda a jak památku financovat</h3><p>Podíváme se na kabátek bývalé synagogy a na to, kde vzít peníze na obnovu kulturní památky.</p></li>
+<li class="ep" data-id="DaNnhGtKSYv">
+<figure class="frame"><div class="media"><button type="button" class="play" aria-label="Přehrát Díl 3: Z vlhkého sklepa obytná místnost"><img src="nahledy/DaNnhGtKSYv.jpg" alt="Díl 3: Z vlhkého sklepa obytná místnost" width="360" height="640" loading="lazy"><span class="pbtn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3.5v17l14-8.5z" fill="currentColor"/></svg></span></button></div><figcaption><span class="ep-n">Díl 3</span><a class="watch" href="https://www.instagram.com/p/DaNnhGtKSYv/" target="_blank" rel="noopener">Otevřít na Instagramu</a></figcaption></figure>
+<h3>Z vlhkého sklepa obytná místnost</h3><p>Jak vysušit sklep a udělat z něj místo k bydlení. A k tomu jeden skrytý tip navíc.</p></li>
+<li class="ep" data-id="DafptHOq3G7">
+<figure class="frame"><div class="media"><button type="button" class="play" aria-label="Přehrát Díl 4: Středověký labyrint v jednom celku"><img src="nahledy/DafptHOq3G7.jpg" alt="Díl 4: Středověký labyrint v jednom celku" width="360" height="640" loading="lazy"><span class="pbtn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3.5v17l14-8.5z" fill="currentColor"/></svg></span></button></div><figcaption><span class="ep-n">Díl 4</span><a class="watch" href="https://www.instagram.com/p/DafptHOq3G7/" target="_blank" rel="noopener">Otevřít na Instagramu</a></figcaption></figure>
+<h3>Středověký labyrint v jednom celku</h3><p>Jak jsme propojili spleť středověkých místností do jednoho obytného celku.</p></li>
+<li class="ep" data-id="DaxvphzqxpR">
+<figure class="frame"><div class="media"><button type="button" class="play" aria-label="Přehrát Díl 5: Půda, zateplení a dotace"><img src="nahledy/DaxvphzqxpR.jpg" alt="Díl 5: Půda, zateplení a dotace" width="360" height="640" loading="lazy"><span class="pbtn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3.5v17l14-8.5z" fill="currentColor"/></svg></span></button></div><figcaption><span class="ep-n">Díl 5</span><a class="watch" href="https://www.instagram.com/p/DaxvphzqxpR/" target="_blank" rel="noopener">Otevřít na Instagramu</a></figcaption></figure>
+<h3>Půda, zateplení a dotace</h3><p>Nevyužitá půda se stala gamechangerem celé chalupy. Promyšlené zateplení pomohlo i k dotacím.</p></li>
+<li class="ep" data-id="Db-6Mtrq6cj">
+<figure class="frame"><div class="media"><button type="button" class="play" aria-label="Přehrát Bonus: Záběry, které neměly vyjít"><img src="nahledy/Db-6Mtrq6cj.jpg" alt="Bonus: Záběry, které neměly vyjít" width="360" height="640" loading="lazy"><span class="pbtn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3.5v17l14-8.5z" fill="currentColor"/></svg></span></button></div><figcaption><span class="ep-n">Bonus</span><a class="watch" href="https://www.instagram.com/p/Db-6Mtrq6cj/" target="_blank" rel="noopener">Otevřít na Instagramu</a></figcaption></figure>
+<h3>Záběry, které neměly vyjít</h3><p>Na úplný závěr to, co zůstalo ve střižně. Posuďte sami, že už potřebujeme dovolenou.</p></li>
+</ol>
+</div></main>
+<section class="cta-sec"><div class="wrap"><h2>Na podzim pokračujeme vilou v&nbsp;Bezovce</h2><p>Další seriál bude z rekonstrukce plzeňské vily.<br>Sledujte nás, ať o něj nepřijdete.</p><div class="cta-row"><a class="cta cta-ig" href="https://www.instagram.com/_mam_atelier/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="currentColor"/></svg>Sledovat na Instagramu</a><a class="cta cta-fb" href="https://www.facebook.com/profile.php?id=61572984605915" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.2h2.8l.5-3.3h-3.3V8.4c0-.9.4-1.7 1.8-1.7h1.6V3.8c-.3 0-1.3-.2-2.4-.2-2.5 0-4 1.5-4 4.200v2.900H7.700v3.300h2.800V22z" fill="currentColor"/></svg>Sledovat na Facebooku</a></div></div></section>
+<footer><div class="wrap"><div class="social"><span><i class="dash"></i>Ozvěte se:</span><ul><li><a href="https://www.instagram.com/_mam_atelier/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/profile.php?id=61572984605915" target="_blank" rel="noopener">Facebook</a></li></ul></div></div></footer>
+<script>
+(function(){
+  var b=document.querySelector('.burger'),root=document.documentElement;
+  function set(o){root.classList.toggle('menu-open',o);b.setAttribute('aria-expanded',o)}
+  b.addEventListener('click',function(){set(!root.classList.contains('menu-open'))});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});
+  document.addEventListener('click',function(e){if(root.classList.contains('menu-open')&&!e.target.closest('.menu,.burger'))set(false)});
+})();
+(function(){
+  var current=null;
+  document.querySelectorAll('.ep').forEach(function(li){
+    var btn=li.querySelector('.play'); if(!btn) return;
+    btn.addEventListener('click',function(){
+      var id=li.getAttribute('data-id'), box=li.querySelector('.media');
+      var v=document.createElement('video');
+      v.src='videa/'+id+'.mp4';
+      v.poster='nahledy/'+id+'.jpg';
+      v.controls=true; v.playsInline=true; v.preload='auto';
+      v.setAttribute('aria-label',btn.getAttribute('aria-label').replace('Přehrát ',''));
+      v.addEventListener('play',function(){ if(current&&current!==v) current.pause(); current=v; li.classList.add('is-playing'); });
+      v.addEventListener('pause',function(){ li.classList.remove('is-playing'); });
+      v.addEventListener('ended',function(){ li.classList.remove('is-playing'); });
+      box.innerHTML=''; box.appendChild(v);
+      var p=v.play(); if(p&&p.catch) p.catch(function(){});
+      v.focus();
+    });
+  });
+})();
+</script>
+</body></html>
