@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+	<script>document.documentElement.className += ' js';</script>
+	<meta charset="utf-8">
+	<meta name="robots" content="index, follow">
+	<title>Na čem dělám v říjnu 2026 — Adam Marčan</title>
+	<meta name="description" content="Na čem Adam Marčan pracuje v říjnu 2026.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#f5f0e0">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@600;700;800;900&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+
+	<style>
+		:root {
+			--bg: #f5f0e0;
+			--ink: #333;
+			--muted: rgba(51, 51, 51, .68);
+			--line: rgba(51, 51, 51, .24);
+			--accent: #c13c2e;
+			--ease: cubic-bezier(.2, .7, .2, 1);
+			--text: Newsreader, Georgia, serif;
+			--display: "Sofia Sans Extra Condensed", system-ui, sans-serif;
+		}
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+		html { background: var(--bg); -webkit-text-size-adjust: 100%; }
+		body {
+			background-color: var(--bg);
+			/* papírový blok: tečky + jemné zrno + lehké mramorování */
+			background-image:
+				radial-gradient(circle, rgba(51, 51, 51, .09) 1.7px, transparent 2.1px),
+				url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32  0 0 0 0 .25  0 0 0 0 .14  .1 0 0 0 -.03'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+				url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='m' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .005' numOctaves='3' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5  0 0 0 0 .38  0 0 0 0 .15  .2 0 0 0 -.075'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+			background-size: 42px 42px, 260px 260px, 900px 900px;
+			min-height: 100vh;
+			color: var(--ink);
+			font-family: var(--text);
+			font-size: 16px;
+			line-height: 1.5;
+			-webkit-font-smoothing: antialiased;
+		}
+		a { color: inherit; text-decoration: none; }
+		.page { max-width: 1120px; margin: 0 auto; padding: 64px 40px 96px; }
+		.wrap { max-width: 860px; }
+
+		h1 { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(50px, 7vw, 100px); letter-spacing: -.005em; line-height: .92; margin-bottom: 44px; }
+
+		h2 { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(38px, 4.8vw, 64px); letter-spacing: 0; line-height: .95; margin: 72px 0 24px; }
+
+		ul { list-style: none; }
+		ul::before { content: ""; display: block; height: 14px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 16' preserveAspectRatio='none'%3E%3Cpath d='M3 8 C 90 4, 180 11, 290 7 S 480 10, 610 6 S 800 10, 900 7 S 975 9, 997 6' fill='none' stroke='%23333' stroke-width='3.2' stroke-opacity='.9' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat; }
+		li {
+			padding: 22px 8px 26px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 16' preserveAspectRatio='none'%3E%3Cpath d='M4 9 C 120 6, 260 11, 400 8 S 640 11, 780 8 S 940 10, 996 7' fill='none' stroke='%23333' stroke-width='2.2' stroke-opacity='.38' stroke-linecap='round'/%3E%3C/svg%3E") bottom / 100% 10px no-repeat;
+			font-family: var(--display); font-size: clamp(26px, 2.8vw, 36px); line-height: 1.2; font-weight: 800; letter-spacing: 0;
+			transition: background .3s, padding .3s var(--ease);
+		}
+		li:nth-child(2) { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 16' preserveAspectRatio='none'%3E%3Cpath d='M2 7 C 140 10, 250 5, 420 8 S 650 6, 800 9 S 950 7, 998 9' fill='none' stroke='%23333' stroke-width='2.2' stroke-opacity='.38' stroke-linecap='round'/%3E%3C/svg%3E"); }
+		li:nth-child(3) { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 16' preserveAspectRatio='none'%3E%3Cpath d='M5 8 C 90 11, 210 6, 380 9 S 600 7, 760 10 S 930 8, 995 6' fill='none' stroke='%23333' stroke-width='2.2' stroke-opacity='.38' stroke-linecap='round'/%3E%3C/svg%3E"); }
+		li:hover { background-color: rgba(51, 51, 51, .06); padding-left: 16px; }
+
+		.back {
+			display: inline-flex; align-items: center; gap: 10px; margin-top: 48px;
+			background: var(--accent); color: #fff; border-radius: 4px; padding: 18px 26px;
+			font-family: var(--display); font-style: normal; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; font-size: 15px;
+			transition: background .25s;
+		}
+		.back span { display: inline-block; font-style: normal; transition: transform .3s var(--ease); }
+		.back:hover { background: #a22b14; }
+		.back:hover span { transform: translateX(-4px); }
+
+		.in { opacity: 0; transform: translateY(14px); animation: rise .8s var(--ease) both; animation-delay: calc(var(--i, 0) * 90ms + .1s); }
+		@keyframes rise { to { opacity: 1; transform: none; } }
+
+		@media (max-width: 860px) {
+			.page { padding: 40px 20px 64px; }
+			.back { margin-top: 36px; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { animation: none !important; transition: none !important; }
+			.in { opacity: 1; transform: none; }
+		}
+	</style>
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-97657215-2', 'auto');
+		ga('send', 'pageview');
+	</script>
+</head>
+<body>
+	<div class="page">
+		<div class="wrap">
+			<h1 class="in" style="--i:0">Na čem dělám v říjnu&nbsp;2026</h1>
+
+			<ul>
+				<li class="in" style="--i:1">Seriál z rekonstrukce vily v Bezovce</li>
+				<li class="in" style="--i:2">Administrační rozhraní pro Keytone.cz</li>
+				<li class="in" style="--i:3">Kurz kaligrafie s Anežkou Peroutkou</li>
+			</ul>
+
+			<h2 class="in" style="--i:4">Co jsem dodělal v minulých měsících</h2>
+			<ul>
+				<li class="in" style="--i:5">Seriál Vrchlického</li>
+				<li class="in" style="--i:6">Seriál Rabí</li>
+				<li class="in" style="--i:7">Web topeni-pospisil</li>
+			</ul>
+
+			<a class="back in" style="--i:8" href="index.html"><span>←</span> Zpět na hlavní stránku</a>
+		</div>
+	</div>
+</body>
+</html>
