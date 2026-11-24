@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Nahraj PDF – 3D kniha</title>
+  <style>
+    :root {
+      --fg: #f3ebdd; --muted: rgba(243,235,221,.55); --faint: rgba(243,235,221,.14);
+      --accent: #e8794a; --bg: #141210;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; color: var(--fg); overflow: hidden;
+      font: 15px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: radial-gradient(ellipse at 50% 35%, #2a2420 0%, var(--bg) 70%); }
+    [hidden] { display: none !important; }
+
+    /* ---------- Úvod ---------- */
+    #intro { position: fixed; inset: 0; display: grid; place-items: center; padding: 24px;
+      transition: opacity .5s, transform .5s; }
+    #intro.leaving { opacity: 0; transform: scale(.98); pointer-events: none; }
+    .hero { text-align: center; max-width: 1200px; }
+    h1 { margin: 0; font-weight: 900; letter-spacing: -.045em; line-height: .92;
+      font-size: clamp(52px, 10.5vw, 168px); text-wrap: balance; }
+    h1 .accent { color: var(--accent); }
+    h1 .line { display: block; opacity: 0; transform: translateY(24px);
+      animation: rise .9s cubic-bezier(.2,.7,.2,1) forwards; }
+    h1 .line:nth-child(2) { animation-delay: .12s; }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+
+    .pick { margin-top: clamp(32px, 6vh, 64px); display: inline-flex; flex-direction: column; align-items: center; gap: 14px;
+      opacity: 0; animation: rise .9s .35s cubic-bezier(.2,.7,.2,1) forwards; }
+    .pick button { appearance: none; border: 0; cursor: pointer; font: inherit; font-weight: 700; font-size: 17px;
+      color: #1a1512; background: var(--fg); padding: 18px 30px; border-radius: 999px;
+      display: inline-flex; align-items: center; gap: 10px; transition: transform .15s, background .15s; }
+    .pick button:hover { transform: translateY(-2px); background: #fff; }
+    .pick button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .pick button svg { width: 20px; height: 20px; }
+    .pick small { color: var(--muted); font-size: 13px; }
+    .error { color: #ff9b7a; font-size: 14px; min-height: 1.4em; }
+
+    /* přetahování */
+    #drop { position: fixed; inset: 14px; border: 2px dashed var(--accent); border-radius: 28px;
+      display: grid; place-items: center; font-size: clamp(28px, 5vw, 56px); font-weight: 900; letter-spacing: -.03em;
+      background: rgba(20,18,16,.82); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      opacity: 0; pointer-events: none; transition: opacity .15s; z-index: 10; }
+    body.dragover #drop { opacity: 1; }
+
+    /* ---------- Příprava ---------- */
+    #progress { position: fixed; inset: 0; display: grid; place-items: center; text-align: center; }
+    #progress p { margin: 0 0 16px; font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; }
+    #progress strong { display: block; color: var(--fg); font-size: clamp(22px, 3vw, 32px); letter-spacing: -.02em;
+      margin-bottom: 8px; max-width: 80vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar { width: min(320px, 70vw); height: 3px; margin: 0 auto; background: var(--faint); border-radius: 3px; overflow: hidden; }
+    .bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+
+    /* ---------- Kniha ---------- */
+    #viewer { position: fixed; inset: 0; opacity: 0; transition: opacity .8s; }
+    #viewer.shown { opacity: 1; }
+    #stage { position: absolute; inset: 0; }
+    #stage canvas { display: block; }
+    header { position: absolute; top: 0; left: 0; right: 0; padding: 20px 24px; display: flex; gap: 16px;
+      justify-content: space-between; align-items: center; pointer-events: none; }
+    header h2 { margin: 0; font-size: 15px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    header button { pointer-events: auto; flex: none; appearance: none; font: inherit; font-size: 13px; color: var(--fg); cursor: pointer;
+      background: rgba(243,235,221,.08); border: 1px solid var(--faint); padding: 8px 14px; border-radius: 999px; transition: background .15s; }
+    header button:hover { background: rgba(243,235,221,.16); }
+    nav { position: absolute; left: 50%; bottom: max(22px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+      display: flex; align-items: center; gap: 6px; padding: 6px; border-radius: 999px;
+      background: rgba(20,18,16,.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--faint); }
+    nav button { appearance: none; border: 0; background: transparent; color: var(--fg); width: 40px; height: 40px;
+      border-radius: 999px; cursor: pointer; display: grid; place-items: center; transition: background .15s, opacity .15s; }
+    nav button:hover:not(:disabled) { background: rgba(243,235,221,.1); }
+    nav button:focus-visible, header button:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+    nav button:disabled { opacity: .3; cursor: default; }
+    nav svg { width: 18px; height: 18px; }
+    #counter { min-width: 110px; text-align: center; font-variant-numeric: tabular-nums; font-size: 13px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <!-- 1) Úvod -->
+  <section id="intro">
+    <div class="hero">
+      <h1><span class="line">Adame, nahraj sem</span><span class="line"><span class="accent">svoje PDF.</span></span></h1>
+      <div class="pick">
+        <button id="choose" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"/></svg>
+          Vybrat PDF z disku
+        </button>
+        <small>nebo ho sem přetáhni · soubor zůstává jen ve tvém prohlížeči</small>
+        <div class="error" id="error" role="alert"></div>
+      </div>
+      <input id="file" type="file" accept="application/pdf,.pdf" hidden>
+    </div>
+  </section>
+  <div id="drop">Pusť to sem</div>
+
+  <!-- 2) Převod stránek -->
+  <section id="progress" hidden>
+    <div>
+      <strong id="progressName"></strong>
+      <p id="progressText">Otevírám PDF…</p>
+      <div class="bar"><i id="progressBar"></i></div>
+    </div>
+  </section>
+
+  <!-- 3) Kniha -->
+  <section id="viewer" hidden>
+    <div id="stage" aria-label="3D kniha – listuj kliknutím, tažením nebo šipkami"></div>
+    <header>
+      <h2 id="title"></h2>
+      <button id="again" type="button">Nahrát jiné PDF</button>
+    </header>
+    <nav>
+      <button id="first" aria-label="Na začátek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 18l-6-6 6-6M8 6v12"/></svg></button>
+      <button id="prev" aria-label="Předchozí stránka"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div id="counter" aria-live="polite">Obálka</div>
+      <button id="next" aria-label="Další stránka"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+      <button id="last" aria-label="Na konec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l6 6-6 6M16 6v12"/></svg></button>
+    </nav>
+  </section>
+
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three.module.min.js" } }
+  </script>
+  <script type="module">
+    import * as pdfjs from './vendor/pdf.min.js';
+    import { createFlipbook } from './flipbook.js';
+
+    pdfjs.GlobalWorkerOptions.workerSrc = new URL('./vendor/pdf.worker.min.js', import.meta.url).href;
+    const PDFJS_ASSETS = new URL('./vendor/pdfjs/', import.meta.url).href;
+    const MAX_PAGES = 300;
+
+    const $ = (id) => document.getElementById(id);
+    const intro = $('intro'), progress = $('progress'), viewer = $('viewer');
+    let book = null;
+    let pageUrls = [];
+    let busy = false;
+
+    /* ---------- výběr souboru ---------- */
+    $('choose').onclick = () => $('file').click();
+    $('file').onchange = (e) => { const f = e.target.files[0]; e.target.value = ''; if (f) open(f); };
+
+    let dragDepth = 0;
+    window.addEventListener('dragenter', (e) => { e.preventDefault(); if (!busy && ++dragDepth) document.body.classList.add('dragover'); });
+    window.addEventListener('dragleave', () => { if (--dragDepth <= 0) { dragDepth = 0; document.body.classList.remove('dragover'); } });
+    window.addEventListener('dragover', (e) => e.preventDefault());
+    window.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dragDepth = 0;
+      document.body.classList.remove('dragover');
+      const f = [...(e.dataTransfer?.files || [])].find((x) => x.type === 'application/pdf' || /\.pdf$/i.test(x.name));
+      if (busy) return;
+      if (f) open(f); else showError('Tohle není PDF. Zkus jiný soubor.');
+    });
+
+    function showError(msg) {
+      $('error').textContent = msg;
+      show('intro');
+    }
+
+    function show(which) {
+      intro.hidden = which !== 'intro';
+      intro.classList.remove('leaving');
+      progress.hidden = which !== 'progress';
+      viewer.hidden = which !== 'viewer';
+      if (which === 'viewer') requestAnimationFrame(() => viewer.classList.add('shown'));
+      else viewer.classList.remove('shown');
+    }
+
+    /* ---------- PDF → obrázky stránek ---------- */
+    async function open(file) {
+      busy = true;
+      $('error').textContent = '';
+      intro.classList.add('leaving');
+      await new Promise((r) => setTimeout(r, 350));
+      show('progress');
+      const name = file.name.replace(/\.pdf$/i, '');
+      $('progressName').textContent = name;
+      $('progressText').textContent = 'Otevírám PDF…';
+      $('progressBar').style.width = '0';
+
+      let doc, task;
+      try {
+        task = pdfjs.getDocument({
+          data: new Uint8Array(await file.arrayBuffer()),
+          cMapUrl: PDFJS_ASSETS + 'cmaps/', cMapPacked: true,
+          standardFontDataUrl: PDFJS_ASSETS + 'standard_fonts/',
+          wasmUrl: PDFJS_ASSETS + 'wasm/',
+          iccUrl: PDFJS_ASSETS + 'iccs/',
+        });
+        doc = await task.promise;
+      } catch (err) {
+        task?.destroy();
+        busy = false;
+        const msg = err?.name === 'PasswordException' ? 'PDF je zaheslované, to neumím otevřít.' : 'Tohle PDF se nepodařilo otevřít.';
+        return showError(msg);
+      }
+
+      const total = doc.numPages;
+      const count = Math.min(total, MAX_PAGES);
+      // čím víc stránek, tím menší rozlišení (šetří paměť grafiky)
+      const targetW = count <= 30 ? 1200 : count <= 80 ? 1000 : 700;
+      const urls = [];
+      let aspect = 1.414;
+
+      try {
+        for (let i = 1; i <= count; i++) {
+          $('progressText').textContent = `Připravuji stránku ${i} / ${count}`;
+          const page = await doc.getPage(i);
+          const base = page.getViewport({ scale: 1 });
+          if (i === 1) aspect = base.height / base.width;
+          const viewport = page.getViewport({ scale: Math.min(targetW / base.width, (targetW * 2) / base.height) });
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.round(viewport.width);
+          canvas.height = Math.round(viewport.height);
+          await page.render({ canvas, viewport }).promise;
+          const blob = await new Promise((r) => canvas.toBlob(r, 'image/jpeg', 0.9));
+          urls.push(URL.createObjectURL(blob));
+          page.cleanup();
+          canvas.width = canvas.height = 0;
+          $('progressBar').style.width = `${(i / count) * 100}%`;
+        }
+      } catch (err) {
+        console.error(err);
+        urls.forEach(URL.revokeObjectURL);
+        busy = false;
+        return showError('Při převodu stránek se něco pokazilo.');
+      } finally {
+        task.destroy();
+      }
+
+      $('progressText').textContent = 'Vázám knihu…';
+      mountBook(urls, aspect, total > MAX_PAGES ? `${name} (prvních ${MAX_PAGES} stran)` : name);
+    }
+
+    /* ---------- kniha ---------- */
+    function mountBook(urls, aspect, title) {
+      unmountBook();
+      pageUrls = urls;
+      $('title').textContent = title;
+      viewer.hidden = false;          // kontejner musí mít rozměry dřív, než se kniha vytvoří
+      book = createFlipbook($('stage'), {
+        pages: urls,
+        aspect,
+        onReady: () => { busy = false; show('viewer'); },
+        onChange: ({ label, atStart, atEnd }) => {
+          $('counter').textContent = label;
+          $('first').disabled = $('prev').disabled = atStart;
+          $('last').disabled = $('next').disabled = atEnd;
+        },
+      });
+    }
+
+    function unmountBook() {
+      if (book) { book.destroy(); book = null; }
+      pageUrls.forEach(URL.revokeObjectURL);
+      pageUrls = [];
+    }
+
+    $('first').onclick = () => book?.first();
+    $('prev').onclick = () => book?.prev();
+    $('next').onclick = () => book?.next();
+    $('last').onclick = () => book?.last();
+    $('again').onclick = () => {
+      viewer.classList.remove('shown');
+      setTimeout(() => { unmountBook(); show('intro'); }, 400);
+    };
+  </script>
+</body>
+</html>
